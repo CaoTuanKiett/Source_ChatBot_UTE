@@ -37,7 +37,14 @@ echo \
  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
 sudo apt-get update
+
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+tải docker compose
+sudo apt install docker-compose
+docker-compose --version
 
 # pull image
 
@@ -92,3 +99,18 @@ docker compose down
 # chạt file docker compose
 
 docker-compose up --build -d
+
+## Cài đặt git
+
+sudo apt update
+sudo apt install git
+git --version
+git clone https://github.com/CaoTuanKiett/Source_ChatBot_UTE.git
+
+## Câu lệnh trong ubuntu
+
+đnag đứng thư mục nào: pwd
+lietj kê danh sách file: ls
+tạo một thư mục mới: mkdir .env
+xóa thư mục rm -r .env
+lưu thoát ctrl + X ==> Y ==> Enter

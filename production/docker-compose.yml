@@ -23,23 +23,9 @@ services:
     expose:
       - 3307
 
-  frontend:
-    build:
-      context: ./UTE_Chatbot_Management
-      dockerfile: Dockerfile
-    ports:
-      - "3000:80"
-    restart: always
-    depends_on:
-      - backend
-    networks:
-      - mynetwork
-    expose:
-      - 3000
-
   backend:
     build:
-      context: ./chatbot-server
+      context: ../chatbot-server
       dockerfile: Dockerfile
     tty: true
     ports:
