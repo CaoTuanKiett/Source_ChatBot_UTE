@@ -25,7 +25,7 @@ services:
 
   frontend:
     build:
-      context: ./UTE_Chatbot_Management
+      context: ../UTE_Chatbot_Management
       dockerfile: Dockerfile
     ports:
       - "3000:80"
@@ -39,14 +39,15 @@ services:
 
   backend:
     build:
-      context: ./chatbot-server
+      context: ../chatbot-server
       dockerfile: Dockerfile
     tty: true
     ports:
       - "8000:8000"
     restart: always
     depends_on:
-      - database
+      database:
+        condition: service_healthy
     environment:
       - DATABASE_URL=mysql+pymysql://root:123456789@database:3306/chatbot_ute
       - DB_HOST=database
