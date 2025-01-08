@@ -21,33 +21,6 @@ docker push tuankiet777/sourcecode-frontend:v2.0
 
 ### Câu lệnh trên Ubuntu
 
-## Setup docker
-
-# Add Docker's official GPG key:
-
-sudo apt-get update
-sudo apt-get install ca-certificates curl
-sudo install -m 0755 -d /etc/apt/keyrings
-sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-sudo chmod a+r /etc/apt/keyrings/docker.asc
-
-# Add the repository to Apt sources:
-
-echo \
- "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
- $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
- sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-
-sudo apt-get update
-
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-
-tải docker compose
-sudo apt-get update
-
-sudo apt install docker-compose
-docker-compose --version
-
 # pull image
 
 sudo docker pull tuankiet777/mysql:1.0.0
@@ -116,3 +89,76 @@ lietj kê danh sách file: ls
 tạo một thư mục mới: mkdir .env
 xóa thư mục rm -r .env
 lưu thoát ctrl + X ==> Y ==> Enter
+
+#### START
+
+## Setup docker
+
+# Add Docker's official GPG key:
+
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+
+echo \
+ "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+ $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+ sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt-get update
+
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+tải docker compose
+sudo apt-get update
+
+sudo apt install docker-compose
+docker-compose --version
+
+## Cài đặt git
+
+sudo apt update
+sudo apt install git
+git --version
+git clone https://github.com/CaoTuanKiett/Source_ChatBot_UTE.git
+
+## Config Port AWS
+
+- http: 80
+- https: 433
+
+## config DNS tên miền chatbotute.io.vn
+
+chatbotute.io.vn
+
+## Câu lệnh docker
+
+sudo docker-compose down
+
+sudo docker-compose up --build -d
+
+sudo docker-compose ps
+
+## câu lệnh NGINX
+
+sudo apt install certbot python3-certbot-nginx
+sudo certbot --nginx -d chatbotute.io.vn -d www.chatbotute.io.vn
+
+## Câu lệnh stop nginx
+
+sudo lsof -i :80
+
+sudo systemctl stop nginx
+
+## Cấp quyền đọc cho toàn bộ nội dung thư mục
+
+sudo chmod -R 755 /etc/letsencrypt
+sudo chmod -R 644 /etc/letsencrypt/live/chatbotute.io.vn/\*
+
+# Kiểm tra nội dung thư mục
+
+ls -l /etc/letsencrypt/live/chatbotute.io.vn/

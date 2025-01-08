@@ -37,7 +37,7 @@ app = FastAPI()
 # Cấu hình CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # URL frontend được phép truy cập
+    allow_origins=["*"],  # URL frontend được phép truy cập
     allow_credentials=True,  # Cho phép gửi cookie/authorization header
     allow_methods=["*"],  # Cho phép tất cả các phương thức HTTP (GET, POST, ...)
     allow_headers=["*"],  # Cho phép tất cả các headers
