@@ -23,19 +23,19 @@ services:
     expose:
       - 3307
 
-  frontend:
-    build:
-      context: ../UTE_Chatbot_Management
-      dockerfile: Dockerfile
-    ports:
-      - "3000:80"
-    restart: always
-    depends_on:
-      - backend
-    networks:
-      - mynetwork
-    expose:
-      - 3000
+  # frontend:
+  #   build:
+  #     context: ../UTE_Chatbot_Management
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "3000:80"
+  #   restart: always
+  #   depends_on:
+  #     - backend
+  #   networks:
+  #     - mynetwork
+  #   expose:
+  #     - 3000
 
   backend:
     build:
@@ -64,10 +64,25 @@ services:
       "
     networks:
       - mynetwork
-    expose:
-      - 8000
-    extra_hosts:
-      - "host.docker.local:host-gateway"
+    # expose:
+    #   - 8000
+    # extra_hosts:
+    #   - "host.docker.local:host-gateway"
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx_container
+    restart: always
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - /etc/letsencrypt:/etc/letsencrypt # Mount chứng chỉ SSL vào container
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - backend
+    networks:
+      - mynetwork
 
 networks:
   mynetwork:
