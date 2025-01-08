@@ -1,0 +1,9 @@
+# Bỏ qua các thư mục và file không cần thiết
+__pycache__/
+*.pyc
+*.pyo
+*.db
+.vscode/
+.idea/
+*.log
+venv/

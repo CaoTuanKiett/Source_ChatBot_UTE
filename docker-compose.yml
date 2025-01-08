@@ -1,0 +1,76 @@
+version: "3.8"
+
+services:
+  database:
+    image: mysql:8.0
+    container_name: mysql_container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456789
+      MYSQL_DATABASE: chatbot_ute
+      TZ: UTC
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - mynetwork
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    expose:
+      - 3307
+
+  frontend:
+    build:
+      context: ./UTE_Chatbot_Management
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    restart: always
+    depends_on:
+      - backend
+    networks:
+      - mynetwork
+    expose:
+      - 3000
+
+  backend:
+    build:
+      context: ./chatbot-server
+      dockerfile: Dockerfile
+    tty: true
+    ports:
+      - "8000:8000"
+    restart: always
+    depends_on:
+      - database
+    environment:
+      - DATABASE_URL=mysql+pymysql://root:123456789@database:3306/chatbot_ute
+      - DB_HOST=database
+      - DB_PORT=3307
+      - DB_USERNAME=root
+      - DB_PASSWORD=123456789
+      - DB_NAME=chatbot_ute
+    command: >
+      sh -c "
+      sleep 15 &&
+      python -m app.database.create_tables &&
+      python -m app.database.init_database &&
+      uvicorn app.main:app --host 0.0.0.0 --port 8000
+      "
+    networks:
+      - mynetwork
+    expose:
+      - 8000
+    extra_hosts:
+      - "host.docker.local:host-gateway"
+
+networks:
+  mynetwork:
+    driver: bridge
+
+volumes:
+  db_data:

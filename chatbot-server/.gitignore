@@ -1,0 +1,18 @@
+# .env
+# venv/
+
+# Ignore Python bytecode files
+*.py[cod]
+*.pyc
+__pycache__/
+
+# Ignore virtual environment directories
+venv/
+env/
+
+# Ignore environment variable files
+.env
+
+# Ignore other files and directories
+*.log
+*.sqlite3

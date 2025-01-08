@@ -1,0 +1,21 @@
+{
+  "configurations": [
+    {
+      "type": "debugpy",
+      "request": "launch",
+      "name": "Launch FastAPI App",
+      "program": "${workspaceFolder}/${input:programPath}",
+      "args": ["--reload"],
+      "console": "integratedTerminal",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ],
+  "inputs": [
+    {
+      "type": "pickString",
+      "id": "programPath",
+      "description": "Select the entry point for your FastAPI app",
+      "options": ["app/main.py", "test/test_main.py"]
+    }
+  ]
+}

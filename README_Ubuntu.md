@@ -1,0 +1,94 @@
+Mở Terminal và chạy các câu lệnh sau để cập nhật danh sách gói và cài đặt Nginx:
+sudo apt update
+sudo apt install nginx
+
+mysql -h 127.0.0.1 -P 3306 -u root
+
+docker exec -it 510d019573e4 bash
+
+docker logs sourcecode-backend-1
+
+    # command: >
+    #   sh -c "
+    #   sleep 10 &&
+    #   python -m app.database.create_tables &&
+    #   python -m app.database.init_database &&
+    #   uvicorn app.main:app --host 0.0.0.0 --port 8000
+    #   "
+
+docker tag 61c2f9653cd5 tuankiet777/sourcecode-frontend:v2.0
+docker push tuankiet777/sourcecode-frontend:v2.0
+
+### Câu lệnh trên Ubuntu
+
+## Setup docker
+
+# Add Docker's official GPG key:
+
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+
+echo \
+ "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+ $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+ sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+
+# pull image
+
+sudo docker pull tuankiet777/mysql:1.0.0
+sudo docker pull tuankiet777/sourcecode-frontend:1.0.0
+sudo docker pull tuankiet777/sourcecode-backend:1.0.2
+
+# chạy image:
+
+sudo docker run --name database -d -p 3307:3306 tuankiet777/mysql:1.0.0
+
+sudo docker run --name frontend-container -d -p 3000:80 tuankiet777/sourcecode-frontend:1.0.0
+
+sudo docker run --name backend-container -d -p 8000:8000 tuankiet777/sourcecode-backend:1.0.2
+
+# xem log:
+
+sudo docker logs frontend-container
+sudo docker logs backend-container
+sudo docker logs database
+
+# stop container id
+
+sudo docker stop 3eba6feda8af
+
+# xóa container id
+
+sudo docker rm 3eba6feda8af
+
+# xóa image
+
+sudo docker rmi tuankiet777/sourcecode-backend:1.0.1
+
+## Câu lệnh dưới máy local win
+
+# tag name update version
+
+docker tag sourcecode-backend tuankiet777/sourcecode-backend:1.0.2
+
+# push image lên docker
+
+docker push tuankiet777/sourcecode-backend:1.0.2
+
+# xóa image cũ version
+
+docker rmi tuankiet777/sourcecode-backend:1.0.1
+
+# chạy docker down
+
+docker compose down
+
+# chạt file docker compose
+
+docker-compose up --build -d

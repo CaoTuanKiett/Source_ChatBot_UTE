@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('ant-design-vue/dist/reset.css');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+html,
+html body {
+    font-family: 'Montserrat', 'Roboto', sans-serif !important;
+}
+
+body,
+body * {
+    --sb-track-color: #8e9496;
+    --sb-thumb-color: #5f2020;
+    --sb-size: 8px;
+}
+
+body ::-webkit-scrollbar,
+body *::-webkit-scrollbar {
+    width: var(--sb-size);
+}
+
+body ::-webkit-scrollbar-track,
+body * ::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+    border-radius: 5px;
+}
+
+body ::-webkit-scrollbar-thumb,
+body * ::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+    border-radius: 5px;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+    body,
+    body * {
+        scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+    }
+}
