@@ -113,7 +113,8 @@ sudo apt-get update
 
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
-tải docker compose
+# tải docker compose
+
 sudo apt-get update
 
 sudo apt install docker-compose
@@ -137,22 +138,26 @@ git clone https://github.com/CaoTuanKiett/Source_ChatBot_UTE.git
 
 chatbotute.io.vn
 
-## Cấp quyền đọc cho toàn bộ nội dung thư mục
-
-sudo chmod -R 755 /etc/letsencrypt
-sudo chmod -R 644 /etc/letsencrypt/live/chatbotute.io.vn/\*
-
-# Kiểm tra nội dung thư mục
-
-ls -l /etc/letsencrypt/live/chatbotute.io.vn/
-
 ## Câu lệnh docker
 
 sudo docker-compose down
 
 sudo docker-compose up --build -d
+sudo docker-compose up -d
 
 sudo docker-compose ps
+
+## Cấp quyền đọc cho toàn bộ nội dung thư mục
+
+sudo ls -l /etc/letsencrypt/live/chatbotute.io.vn/
+
+sudo chmod -R 755 /etc/letsencryptcd
+sudo chmod -R 644 /etc/letsencrypt/live/chatbotute.io.vn/\*
+
+# Kiểm tra nội dung thư mục
+
+ls -l /etc/letsencrypt/live/chatbotute.io.vn/
+sudo ls -l /etc/letsencrypt/live/chatbotute.io.vn/
 
 ## câu lệnh NGINX
 

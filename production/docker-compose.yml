@@ -46,7 +46,7 @@ services:
       sleep 15 &&
       python -m app.database.create_tables &&
       python -m app.database.init_database &&
-      uvicorn app.main:app --host 0.0.0.0 --port 8000
+      uvicorn app.main:app --host 0.0.0.0 --port 8000 --proxy-headers --forwarded-allow-ips='*'
       "
     networks:
       - mynetwork
