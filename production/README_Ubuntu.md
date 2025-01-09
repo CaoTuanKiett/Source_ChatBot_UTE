@@ -126,14 +126,25 @@ sudo apt install git
 git --version
 git clone https://github.com/CaoTuanKiett/Source_ChatBot_UTE.git
 
-## Config Port AWS
+# thêm file .env vào chatbot-server
+
+## Config Port trên AWS
 
 - http: 80
 - https: 433
 
-## config DNS tên miền chatbotute.io.vn
+## config DNS tên miền chatbotute.io.vn trên mắt bão
 
 chatbotute.io.vn
+
+## Cấp quyền đọc cho toàn bộ nội dung thư mục
+
+sudo chmod -R 755 /etc/letsencrypt
+sudo chmod -R 644 /etc/letsencrypt/live/chatbotute.io.vn/\*
+
+# Kiểm tra nội dung thư mục
+
+ls -l /etc/letsencrypt/live/chatbotute.io.vn/
 
 ## Câu lệnh docker
 
@@ -148,17 +159,8 @@ sudo docker-compose ps
 sudo apt install certbot python3-certbot-nginx
 sudo certbot --nginx -d chatbotute.io.vn -d www.chatbotute.io.vn
 
-## Câu lệnh stop nginx
+## Câu lệnh stop kiểm tra cổng 80 nginx
 
 sudo lsof -i :80
 
 sudo systemctl stop nginx
-
-## Cấp quyền đọc cho toàn bộ nội dung thư mục
-
-sudo chmod -R 755 /etc/letsencrypt
-sudo chmod -R 644 /etc/letsencrypt/live/chatbotute.io.vn/\*
-
-# Kiểm tra nội dung thư mục
-
-ls -l /etc/letsencrypt/live/chatbotute.io.vn/
