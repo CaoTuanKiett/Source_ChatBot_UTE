@@ -68,7 +68,7 @@ class CauHoiNguoiDung(Base):
     thoi_gian_tao = Column(String(100))
     nguoi_tra_loi = Column(String(255))
     thoi_gian_xu_ly = Column(String(100))
-    chat_bot_id = Column(Integer, ForeignKey("chat_bot.id_chat_bot"))
+    chat_bot_id = Column(Integer, ForeignKey("chat_bot.id_chat_bot", ondelete="SET NULL"))
 
 
 class ChatBot(Base):
@@ -94,7 +94,7 @@ class GopY(Base):
     __tablename__ = "gop_y"
     __table_args__ = {"extend_existing": True}
     id_gop_y = Column(Integer, primary_key=True)
-    chat_bot_id = Column(Integer, ForeignKey("chat_bot.id_chat_bot"))
+    chat_bot_id = Column(Integer, ForeignKey("chat_bot.id_chat_bot", ondelete="SET NULL"))
     ho_ten = Column(String(255))
     email = Column(String(255))
     noi_dung = Column(Text)

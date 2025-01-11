@@ -95,16 +95,23 @@ def generate_response(question: QuestionRequest):
 #     return response.text
 
 def preprocess_with_gemini(question, listMessages):
-    # Tạo prompt để gửi đến model
+    # Tách prompt ra thành một phần riêng
     prompt = (
-        f"Bạn là sinh viên đang tìm hiểu các thông tin về Trường Đại học Sư phạm Kỹ thuật - Đại học Đà Nẵng."
-        f"Bạn đang nhắn tin để tìm hiểu qua chatbot hỗ trợ tuyển sinh của Trường Đại học Sư phạm Kỹ thuật - Đại học Đà Nẵng. "
-        f"Nhiệm vụ của bạn là viết lại các câu hỏi của người dùng để trở nên rõ ràng, dễ hiểu và đầy đủ nhất. "
-        f"Đảm bảo rằng câu hỏi không bị mất ý nghĩa ban đầu, nhưng được bổ sung thông tin cần thiết đúng ngữ cảnh "
-        f"để giúp hệ thống tìm kiếm trả về kết quả chính xác nhất. "
-        f"Hãy viết lại câu hỏi dưới dạng câu hoàn chỉnh, tự nhiên và chuyên nghiệp. "
-        f"Câu hỏi của người dùng là: {question}. "
-        f"Hãy viết lại câu hỏi trên dựa trên lịch sử cuộc hội thoại: {listMessages}. "
+        "Bạn là một sinh viên đang tìm hiểu thông tin về Trường Đại học Sư phạm Kỹ thuật - Đại học Đà Nẵng. "
+        "Hiện tại, bạn đang sử dụng chatbot hỗ trợ tuyển sinh của Trường để đặt câu hỏi và nhận thông tin tư vấn. "
+        "Nhiệm vụ của bạn là viết lại các câu hỏi mà người dùng đã nhập sao cho rõ ràng, dễ hiểu và đầy đủ nhất. "
+        "Đảm bảo rằng: "
+        "- Câu hỏi không bị thay đổi ý nghĩa ban đầu. "
+        "- Nội dung được bổ sung các thông tin cần thiết phù hợp với ngữ cảnh cuộc hội thoại. "
+        "- Văn phong được viết dưới dạng câu hoàn chỉnh, tự nhiên và mang tính chuyên nghiệp. "
+        "Điều này giúp hệ thống tìm kiếm của chatbot trả về kết quả chính xác và hữu ích nhất. "
+        "Lưu ý: "
+         "- Nếu câu hỏi của người dùng có các nghĩa là chào hỏi, cảm ơn, không có thêm câu hỏi, hoặc muốn để lại góp ý thì giữ nguyên câu hỏi và không cần viết lại câu hỏi, trả ra câu hỏi không chỉnh sửa"
+        "\n\n"
+        f"Dưới đây là câu hỏi mà người dùng vừa nhập: {question}\n"
+        f"Lịch sử cuộc hội thoại trước đó: {listMessages}\n"
+        "\n"
+        "Dựa trên câu hỏi và lịch sử hội thoại, hãy viết lại câu hỏi sao cho đáp ứng các tiêu chí trên."
     )
     
     try:
@@ -115,7 +122,6 @@ def preprocess_with_gemini(question, listMessages):
         # Xử lý lỗi và thông báo vấn đề
         print(f"Lỗi trong quá trình xử lý với Gemini: {e}")
         return "Đã xảy ra lỗi khi xử lý câu hỏi. Vui lòng thử lại."
-
 
 
 def generate_response_test(question: QuestionRequest):
