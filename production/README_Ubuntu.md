@@ -138,31 +138,41 @@ git clone https://github.com/CaoTuanKiett/Source_ChatBot_UTE.git
 
 chatbotute.io.vn
 
+## cài đặt NGINX
+
+sudo apt install certbot python3-certbot-nginx
+sudo certbot --nginx -d server.chatbotute.io.vn -d www.server.chatbotute.io.vn
+
+## Cấp quyền đọc cho toàn bộ nội dung thư mục
+
+sudo ls -l /etc/letsencrypt/live/server.chatbotute.io.vn/
+
+<!-- sudo chmod -R 755 /etc/letsencryptcd -->
+
+sudo chmod -R 755 /etc/letsencrypt
+
+<!-- sudo chmod -R 644 /etc/letsencrypt/live/server.chatbotute.io.vn/\* -->
+
+sudo chmod -R 644 /etc/letsencrypt/live/server.chatbotute.io.vn/
+
+## câu lệnh NGINX
+
+sudo docker logs nginx_container
+
+# Kiểm tra nội dung thư mục
+
+ls -l /etc/letsencrypt/live/server.chatbotute.io.vn/
+sudo ls -l /etc/letsencrypt/live/server.chatbotute.io.vn/
+
 ## Câu lệnh docker
 
+cd Source_ChatBot_UTE/production
 sudo docker-compose down
 
 sudo docker-compose up --build -d
 sudo docker-compose up -d
 
 sudo docker-compose ps
-
-## Cấp quyền đọc cho toàn bộ nội dung thư mục
-
-sudo ls -l /etc/letsencrypt/live/chatbotute.io.vn/
-
-sudo chmod -R 755 /etc/letsencryptcd
-sudo chmod -R 644 /etc/letsencrypt/live/chatbotute.io.vn/\*
-
-# Kiểm tra nội dung thư mục
-
-ls -l /etc/letsencrypt/live/chatbotute.io.vn/
-sudo ls -l /etc/letsencrypt/live/chatbotute.io.vn/
-
-## câu lệnh NGINX
-
-sudo apt install certbot python3-certbot-nginx
-sudo certbot --nginx -d chatbotute.io.vn -d www.chatbotute.io.vn
 
 ## Câu lệnh stop kiểm tra cổng 80 nginx
 
